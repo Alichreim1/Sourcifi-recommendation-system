@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tile Recommender</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        form {
+            max-width: 600px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+        }
+
+        button {
+            background-color: #4caf50;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-top: 30px;
+        }
+
+        .all_images {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+        }
+
+        .one_image {
+            margin: 20px;
+            padding: 10px;
+            background-color: #f4f4f4;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            flex: 0 0 calc(20%);
+            text-align: center;
+        }
+
+        img {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 5px;
+            color: #333;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Tile Recommender</h1>
+
+    <form action="/recommend" method="post">
+        <label id="label" for="user_input">Enter your preferences:</label>
+        <input type="text" name="user_input" id="user_input" required>
+        <button type="submit">Recommend Tiles</button>
+    </form>
+    {% if recommended_tiles %}
+    <h2>Recommended Tiles:</h2>
+    <div class="all_images">
+        {% for tile in recommended_tiles %}
+        <div class="one_image">
+            <img src="{{ tile[9] }}" alt="Tile Image" height="200" width="300">
+            <ul>
+                <li>Length: {{tile[0]}} cm</li>
+                <li>Width: {{tile[1]}} cm</li>
+                <li>Thickness: {{tile[2]}}</li>
+                <li>Color: {{tile[3]}}</li>
+                <li>Glossiness: {{tile[4]}}</li>
+                <li>Floor: {{tile[5]}}</li>
+                <li>Wall: {{tile[6]}}</li>
+                <li>Quantity: {{tile[8]}}</li>
+                <li>Price: {{tile[7]}}</li>
+            </ul>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+</body>
+
+</html>
